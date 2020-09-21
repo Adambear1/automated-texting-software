@@ -1,4 +1,9 @@
 .input-row {
-  height: 45vh !important;
+  height: 65% !important;
+  width: auto;
+}
+
+.history-row {
+  height: 35% !important;
   width: auto;
 }

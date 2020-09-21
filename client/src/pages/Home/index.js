@@ -11,7 +11,7 @@ function Home() {
           <Input />
         </div>
       </div>
-      <div className="row">
+      <div className="row history-row">
         <div className="col-12">
           <History />
         </div>
