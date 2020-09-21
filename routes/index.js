@@ -6,14 +6,15 @@ const { email } = require("../utils/Nodemailer");
 const { text } = require("../utils/Nexmo");
 
 router.post("/", ({ body }, res) => {
+  console.log(body);
   db.Input.create({
     body,
   })
     .then((data) => {
       console.log(data);
       res.json(data);
-      email(data);
-      text(data);
+      // email(data);
+      // text(data);
     })
     .catch((err) => {
       res.status(500).json({ err: err.message });

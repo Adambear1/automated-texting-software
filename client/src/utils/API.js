@@ -1,12 +1,9 @@
 import axios from "axios";
 export default {
-  postInquire: (data) => {
-    return axios.post("/api/inquire", data);
+  get: () => {
+    return axios.get("http://localhost:5000/api/input");
   },
-  sendEmail: (data) => {
-    return axios.post("/api/sendEmail", data);
-  },
-  careers: (data) => {
-    return axios.post("/api/careers", data);
+  post: (data) => {
+    return axios.post("http://localhost:5000/api/input", data);
   },
 };

@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
+// utils
+import API from "../../utils/API";
+// components
 import InputCancelledExpired from "../InputCancelledExpired";
 import InputForeclosure from "../InputForeclosure";
 import InputFSBO from "../InputFSBO";
 import InputMain from "../InputMain";
 import InputSend from "../InputSend";
+import InputSuccess from "../InputSuccess";
+import InputFail from "../InputFail";
+import InputError from "../InputError";
 
 function Input() {
   const [data, setData] = useState();
@@ -14,18 +20,41 @@ function Input() {
     Foreclosure: <InputForeclosure data={onChange} />,
     FSBO: <InputFSBO data={onChange} />,
   });
-  useEffect(() => {
-    console.log(data);
-    console.log(type);
-  }, [data, type]);
+  const [state, setState] = useState({});
+  const [status, setStatus] = useState({
+    Success: <InputSuccess />,
+    Fail: <InputFail />,
+    Error: <InputError />,
+  });
+
+  useEffect(() => {}, [data, type]);
   function onChange(e) {
     setData({ ...data, [e.target.name]: e.target.value });
   }
   function onSubmit(e) {
     e.preventDefault();
+    if (!data) {
+      setState("Fail");
+      setTimeout(() => {
+        setState(null);
+      }, 2000);
+    }
+    API.post(data)
+      .then((data) => {
+        setState("Success");
+        setTimeout(() => {
+          setState(null);
+        }, 2000);
+      })
+      .catch((err) => {
+        setState("Error");
+        setTimeout(() => {
+          setState(null);
+        }, 2000);
+      });
   }
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <InputMain
         data={onChange}
         type={(e) => {
@@ -33,6 +62,7 @@ function Input() {
         }}
       />
       {type && component[type]}
+      {state && status[state]}
       <div className="row">
         <div className="col-12 align-item-center">
           <InputSend send={onSubmit} />
