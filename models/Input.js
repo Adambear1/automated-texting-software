@@ -5,15 +5,10 @@ const InputSchema = mongoose.Schema({
     trim: true,
     required: [true, "Address Required"],
   },
-  first_name: {
+  name: {
     type: String,
     trim: true,
-    required: [true, "First Name Required"],
-  },
-  last_name: {
-    type: String,
-    trim: true,
-    required: [true, "Last Name Required"],
+    required: [true, "Name Required"],
   },
   email: {
     type: String,
@@ -25,6 +20,12 @@ const InputSchema = mongoose.Schema({
     trim: true,
     required: [true, "Phone Number Required"],
   },
+  type: {
+    enum: ["Cancelled", "Expired", "Foreclosure", "FSBO"],
+    trim: true,
+    required: [true, "Type Required"],
+  },
+  // Foreclosure
   default_amount: {
     type: String,
     trim: true,
@@ -33,8 +34,18 @@ const InputSchema = mongoose.Schema({
   auction_date: {
     type: Date,
     trim: true,
-    required: [true, "Auction Date Required"],
   },
+  // FSBO
+  list_site: {
+    type: String,
+    trim: true,
+  },
+  // Cancelled/Expired
+  takedown_date: {
+    type: Date,
+    trim: true,
+  },
+  //
   date: {
     type: Date,
     default: Date.now(),

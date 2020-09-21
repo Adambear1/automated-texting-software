@@ -10,8 +10,8 @@ const nexmo = new Nexmo(
 module.exports.text = function (contacts) {
   const number =
     contacts[i].phoneNumber.length >= 7 ? false : "1" + contacts[i].phoneNumber;
-  const message = `Hi ${contacts[i].first_name && contacts[i].first_name} ${
-    contacts[i].last_name && contacts[i].last_name
+  const message = `Hi ${
+    contacts[i].name && contacts[i].name
   }, I noticed xxxxxxxxxxxxxxxxx`;
   nexmo.message.sendSms(
     process.env.NEXMO_PHONENUMBER,
