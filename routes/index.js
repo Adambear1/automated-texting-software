@@ -32,4 +32,19 @@ router.get("/", ({ body }, res) => {
     });
 });
 
+router.delete("/", ({ body }, res) => {
+  console.log(body);
+  db.Input.deleteOne(body)
+    .then((data) => {
+      try {
+        res.json(data);
+      } catch (error) {
+        res.status(400).json(error);
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({ "Server Error": error });
+    });
+});
+
 module.exports = router;

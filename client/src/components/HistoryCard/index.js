@@ -15,6 +15,11 @@ function HistoryCard(props) {
             <i class="far fa-paper-plane"></i>
           </button>
         </li>
+        <li class="history-li">
+          <button type="button" onClick={props.delete}>
+            <i class="far fa-trash-alt" id={`${props.id}`}></i>
+          </button>
+        </li>
       </ul>
     </div>
   );

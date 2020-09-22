@@ -11,6 +11,7 @@ import { Context } from "../Context";
 import HistoryCard from "../HistoryCard";
 import HistoryFilters from "../HistoryFilters";
 import HistoryTypeFilters from "../HistoryTypeFilters";
+import { pipeline } from "nodemailer/lib/xoauth2";
 
 function History() {
   const { value, setValue } = useContext(Context);
@@ -30,12 +31,23 @@ function History() {
       });
     setValue(false);
   }
+  function remove(e, id) {
+    e.preventDefault();
+    API.remove({ _id: id })
+      .then((data) => {
+        console.log(data);
+        // setData(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return (
     <div className="container">
       <HistoryTypeFilters
         all={() => {
           getAll();
-          setState({ type: "" });
+          setState("");
         }}
         cancelledExpired={() => {
           TypeFilterAPICalls.cancelledExpired(API, setData);
@@ -54,27 +66,56 @@ function History() {
         <HistoryFilters
           dateHigh={() => {
             FilterAPICalls.dateHigh(API, setData, state);
+            console.log(data);
           }}
-          dateLow={() => FilterAPICalls.dateLow(API, setData, state)}
-          typeHigh={() => FilterAPICalls.typeHigh(API, setData, state)}
-          typeLow={() => FilterAPICalls.typeLow(API, setData, state)}
-          addressHigh={() => FilterAPICalls.addressHigh(API, setData, state)}
-          addressLow={() => FilterAPICalls.addressLow(API, setData, state)}
-          nameHigh={() => FilterAPICalls.nameHigh(API, setData, state)}
-          nameLow={() => FilterAPICalls.nameLow(API, setData, state)}
+          dateLow={() => {
+            FilterAPICalls.dateLow(API, setData, state);
+            console.log(data);
+          }}
+          typeHigh={() =>
+            state
+              ? FilterAPICalls.typeHigh(API, setData, state)
+              : FilterAPICalls.typeHighAll(API, setData)
+          }
+          typeLow={() =>
+            state
+              ? FilterAPICalls.typeLow(API, setData, state)
+              : FilterAPICalls.typeLowAll(API, setData)
+          }
+          addressHigh={() =>
+            state
+              ? FilterAPICalls.addressHigh(API, setData, state)
+              : FilterAPICalls.addressHighAll(API, setData)
+          }
+          addressLow={() =>
+            state
+              ? FilterAPICalls.addressLow(API, setData, state)
+              : FilterAPICalls.addressLowAll(API, setData)
+          }
+          nameHigh={() =>
+            state
+              ? FilterAPICalls.nameHigh(API, setData, state)
+              : FilterAPICalls.nameHighAll(API, setData)
+          }
+          nameLow={() =>
+            state
+              ? FilterAPICalls.nameLow(API, setData, state)
+              : FilterAPICalls.nameLowAll(API, setData)
+          }
         />
         {data.map((item) => {
-          // DateComparison(item.type, item.date, today);
           return (
             <HistoryCard
-              // icon={() => {
-
-              // }}
               setClass={SetClass(item.type, item.date)}
               date={item.date}
               type={item.type}
               address={item.address}
               name={item.name}
+              id={item._id}
+              delete={(e) => {
+                console.log(e.target);
+                remove(e, e.target.id);
+              }}
               // send={send}
             />
           );
