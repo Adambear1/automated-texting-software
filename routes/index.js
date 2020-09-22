@@ -7,14 +7,11 @@ const { text } = require("../utils/Nexmo");
 
 router.post("/", ({ body }, res) => {
   console.log(body);
-  db.Input.create({
-    body,
-  })
+  db.Input.create(body)
     .then((data) => {
-      console.log(data);
       res.json(data);
-      // email(data);
-      // text(data);
+      data.email && email(data);
+      data.phoneNumber && text(data);
     })
     .catch((err) => {
       res.status(500).json({ err: err.message });

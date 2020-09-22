@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import "./styles.css";
 // utils
 import API from "../../utils/API";
 // components
-import InputCancelledExpired from "../InputCancelledExpired";
-import InputForeclosure from "../InputForeclosure";
-import InputFSBO from "../InputFSBO";
+import { Context } from "../Context";
 import InputMain from "../InputMain";
 import InputSend from "../InputSend";
 import InputSuccess from "../InputSuccess";
@@ -12,22 +11,56 @@ import InputFail from "../InputFail";
 import InputError from "../InputError";
 
 function Input() {
+  const { value, setValue } = useContext(Context);
   const [data, setData] = useState();
-  const [type, setType] = useState();
-  const [component, setComponent] = useState({
-    Cancelled: <InputCancelledExpired data={onChange} type={type} />,
-    Expired: <InputCancelledExpired data={onChange} type={type} />,
-    Foreclosure: <InputForeclosure data={onChange} />,
-    FSBO: <InputFSBO data={onChange} />,
-  });
   const [state, setState] = useState({});
   const [status, setStatus] = useState({
     Success: <InputSuccess />,
     Fail: <InputFail />,
     Error: <InputError />,
   });
-
-  useEffect(() => {}, [data, type]);
+  useEffect(() => {
+    try {
+      console.log(data["type"]);
+      if (data["type"] === "Cancelled" || data["type"] === "Expired") {
+        console.log(
+          document.getElementsByClassName("form-cancelled-expired")[0]
+        );
+        document
+          .getElementsByClassName("form-cancelled-expired")[0]
+          .classList.remove("hide");
+        document
+          .getElementsByClassName("form-fsbo")[0]
+          .classList.addClass("hide");
+        document
+          .getElementsByClassName("form-foreclosure")[0]
+          .classList.addClass("hide");
+      }
+      if (data["type"] === "FSBO") {
+        document
+          .getElementsByClassName("form-cancelled-expired")[0]
+          .classList.add("hide");
+        document
+          .getElementsByClassName("form-fsbo")[0]
+          .classList.remove("hide");
+        document
+          .getElementsByClassName("form-foreclosure")[0]
+          .classList.addClass("hide");
+      }
+      if (data["type"] === "Foreclosure") {
+        document
+          .getElementsByClassName("form-cancelled-expired")[0]
+          .classList.add("hide");
+        document.getElementsByClassName("form-fsbo")[0].classList.add("hide");
+        document
+          .getElementsByClassName("form-foreclosure")[0]
+          .classList.remove("hide");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(data);
+  }, [data]);
   function onChange(e) {
     setData({ ...data, [e.target.name]: e.target.value });
   }
@@ -41,12 +74,14 @@ function Input() {
     }
     API.post(data)
       .then((data) => {
+        setValue(true);
         setState("Success");
         setTimeout(() => {
           setState(null);
         }, 2000);
       })
       .catch((err) => {
+        console.log(err);
         setState("Error");
         setTimeout(() => {
           setState(null);
@@ -57,11 +92,14 @@ function Input() {
     <form onSubmit={onSubmit}>
       <InputMain
         data={onChange}
-        type={(e) => {
-          setType(e.target.value);
+        type={() => {
+          try {
+            return data["type"];
+          } catch (error) {
+            console.log(error);
+          }
         }}
       />
-      {type && component[type]}
       {state && status[state]}
       <div className="row">
         <div className="col-12 align-item-center">

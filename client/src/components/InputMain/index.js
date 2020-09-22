@@ -1,5 +1,5 @@
 import React from "react";
-
+// import "./styles.css";
 function InputMain(props) {
   return (
     <>
@@ -52,18 +52,60 @@ function InputMain(props) {
           class="form-control"
           id="form-type"
           onChange={props.data}
-          onChange={props.type}
         >
-          <option
-            defaultValue="true"
-            placeholder="Select One..."
-            disabled="true"
-          ></option>
+          <option defaultValue="true" placeholder="Select One..."></option>
           <option value="Cancelled">Cancelled</option>
           <option value="Expired">Expired</option>
           <option value="Foreclosure">Foreclosure</option>
           <option value="FSBO">FSBO</option>
         </select>
+      </div>
+      {/* Cancelled/Expired */}
+      <div class="form-group ">
+        <div class="form-cancelled-expired hide">
+          <label for="form-cancelled-expired">Date {props.type}</label>
+          <input
+            name="takedown_date"
+            type="date"
+            class="form-control"
+            id="form-cancelled-expired"
+            onChange={props.data}
+          />
+        </div>
+      </div>
+      {/* FSBO */}
+      <div class="form-group ">
+        <div class="form-fsbo hide">
+          <label for="form-list-site">Listing Site</label>
+          <input
+            name="list_site"
+            type="text"
+            class="form-control"
+            id="form-list-site"
+            onChange={props.data}
+          />
+        </div>
+      </div>
+      {/* Foreclosure */}
+      <div class="form-group ">
+        <div class="form-foreclosure hide">
+          <label for="form-default-amount ">Default Amount</label>
+          <input
+            name="default_amount"
+            type="number"
+            class="form-control"
+            id="form-default-amount"
+            onChange={props.data}
+          />
+          <label for="form-auction-date">Auction Date</label>
+          <input
+            name="auction_date"
+            type="date"
+            class="form-control"
+            id="form-auction-date"
+            onChange={props.data}
+          />
+        </div>
       </div>
     </>
   );
