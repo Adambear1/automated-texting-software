@@ -26,16 +26,10 @@ const InputSchema = mongoose.Schema({
   default_amount: {
     type: String,
   },
-  auction_date: {
-    type: String,
-  },
-  list_site: {
-    type: String,
-  },
-  takedown_date: {
-    type: String,
-  },
   date: {
+    type: String,
+  },
+  date_published: {
     type: Date,
     default: Date.now(),
   },

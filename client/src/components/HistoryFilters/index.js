@@ -11,7 +11,7 @@ function HistoryFilters(props) {
             <button onClick={props.dateHigh}>
               <i className="fas fa-arrow-up"></i>
             </button>
-            <button onClick={props.dateDown}>
+            <button onClick={props.dateLow}>
               <i className="fas fa-arrow-down"></i>
             </button>
           </>
@@ -22,7 +22,7 @@ function HistoryFilters(props) {
             <button onClick={props.typeHigh}>
               <i className="fas fa-arrow-up"></i>
             </button>
-            <button onClick={props.typeDown}>
+            <button onClick={props.typeLow}>
               <i className="fas fa-arrow-down"></i>
             </button>
           </>
@@ -33,7 +33,7 @@ function HistoryFilters(props) {
             <button onClick={props.addressHigh}>
               <i className="fas fa-arrow-up"></i>
             </button>
-            <button onClick={props.addressDown}>
+            <button onClick={props.addressLow}>
               <i className="fas fa-arrow-down"></i>
             </button>
           </>
@@ -44,7 +44,7 @@ function HistoryFilters(props) {
             <button onClick={props.nameHigh}>
               <i className="fas fa-arrow-up"></i>
             </button>
-            <button onClick={props.nameDown}>
+            <button onClick={props.nameLow}>
               <i className="fas fa-arrow-down"></i>
             </button>
           </>

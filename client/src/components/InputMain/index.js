@@ -3,48 +3,75 @@ import React from "react";
 function InputMain(props) {
   return (
     <>
-      <div class="form-group">
-        <label for="form-name">Owner Name</label>
-        <input
-          autoFocus="true"
-          name="name"
-          type="text"
-          class="form-control"
-          onChange={props.data}
-          id="form-name"
-        />
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="form-address">Property Address</label>
+            <input
+              name="address"
+              type="text"
+              class="form-control"
+              onChange={props.data}
+              id="form-address"
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="form-zipcode">Zip Code</label>
+            <input
+              name="zipcode"
+              type="text"
+              class="form-control"
+              onChange={props.data}
+              id="form-zipcode"
+            />
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="form-address">Property Address</label>
-        <input
-          name="address"
-          type="text"
-          class="form-control"
-          onChange={props.data}
-          id="form-address"
-        />
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="form-name">Owner Name</label>
+            <input
+              autoFocus="true"
+              name="name"
+              type="text"
+              class="form-control"
+              onChange={props.data}
+              id="form-name"
+            />
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="form-phoneNumber">Phone Number</label>
-        <input
-          name="phoneNumber"
-          type="tel"
-          class="form-control"
-          onChange={props.data}
-          id="form-phoneNumber"
-          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-        />
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="form-phoneNumber">Phone Number</label>
+            <input
+              name="phoneNumber"
+              type="tel"
+              class="form-control"
+              onChange={props.data}
+              id="form-phoneNumber"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="form-email">Email</label>
+            <input
+              name="email"
+              type="email"
+              class="form-control"
+              id="form-email"
+              onChange={props.data}
+            />
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="form-email">Email</label>
-        <input
-          name="email"
-          type="email"
-          class="form-control"
-          id="form-email"
-          onChange={props.data}
-        />
-      </div>
+
       <div class="form-group">
         <label for="form-type">Type</label>
         <select
@@ -62,10 +89,10 @@ function InputMain(props) {
       </div>
       {/* Cancelled/Expired */}
       <div class="form-group ">
-        <div class="form-cancelled-expired hide">
+        <div class="form-date hide">
           <label for="form-cancelled-expired">Date {props.type}</label>
           <input
-            name="takedown_date"
+            name="date"
             type="date"
             class="form-control"
             id="form-cancelled-expired"
@@ -73,37 +100,15 @@ function InputMain(props) {
           />
         </div>
       </div>
-      {/* FSBO */}
-      <div class="form-group ">
-        <div class="form-fsbo hide">
-          <label for="form-list-site">Listing Site</label>
-          <input
-            name="list_site"
-            type="text"
-            class="form-control"
-            id="form-list-site"
-            onChange={props.data}
-          />
-        </div>
-      </div>
-      {/* Foreclosure */}
-      <div class="form-group ">
+      <div class="form-group">
         <div class="form-foreclosure hide">
-          <label for="form-default-amount ">Default Amount</label>
+          <label for="form-default-amount">Default Amount</label>
           <input
             name="default_amount"
-            type="number"
+            type="text"
             class="form-control"
             id="form-default-amount"
             onChange={props.data}
-          />
-          <label for="form-auction-date">Auction Date</label>
-          <input
-            name="auction_date"
-            type="date"
-            class="form-control"
-            id="form-auction-date"
-            onChange={props.date}
           />
         </div>
       </div>

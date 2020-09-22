@@ -27,3 +27,7 @@
 .history-li:first-child {
   margin-left: 2px;
 }
+.history-ul:nth-last-child() {
+  margin-left: 2px;
+  border-bottom: 0px;
+}

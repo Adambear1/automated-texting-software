@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./styles.css";
 // utils
+import { zipcodes } from "../../utils/zipcodes";
+import { cities } from "../../utils/cities";
 import API from "../../utils/API";
 // components
 import { Context } from "../Context";
@@ -22,40 +24,19 @@ function Input() {
   });
   useEffect(() => {
     try {
-      if (data["type"] === "Cancelled" || data["type"] === "Expired") {
-        console.log(
-          document.getElementsByClassName("form-cancelled-expired")[0]
-        );
+      if (data["type"]) {
         document
-          .getElementsByClassName("form-cancelled-expired")[0]
-          .classList.remove("hide");
-        document
-          .getElementsByClassName("form-fsbo")[0]
-          .classList.addClass("hide");
-        document
-          .getElementsByClassName("form-foreclosure")[0]
-          .classList.addClass("hide");
+          .getElementsByClassName("form-date")[0]
+          .classList.removeClass("hide");
       }
-      if (data["type"] === "FSBO") {
-        document
-          .getElementsByClassName("form-cancelled-expired")[0]
-          .classList.add("hide");
-        document
-          .getElementsByClassName("form-fsbo")[0]
-          .classList.remove("hide");
-        document
-          .getElementsByClassName("form-foreclosure")[0]
-          .classList.addClass("hide");
-      }
-      if (data["type"] === "Foreclosure") {
-        document
-          .getElementsByClassName("form-cancelled-expired")[0]
-          .classList.add("hide");
-        document.getElementsByClassName("form-fsbo")[0].classList.add("hide");
-        document
-          .getElementsByClassName("form-foreclosure")[0]
-          .classList.remove("hide");
-      }
+      // if (date["type"] === "Foreclosure") {
+      //   document
+      //     .getElementsByClassName("form-foreclosure")[0]
+      //     .classList.removeClass("hide");
+      //   document
+      //     .getElementsByClassName("form-date")[0]
+      //     .classList.removeClass("hide");
+      // }
     } catch (error) {
       console.log(error);
     }
