@@ -14,11 +14,13 @@ import HistoryTypeFilters from "../HistoryTypeFilters";
 
 function History() {
   const { value, setValue } = useContext(Context);
+  const [state, setState] = useState("");
   const [data, setData] = useState([]);
   useEffect(() => {
-    all();
+    getAll();
+    console.log(state);
   }, [value]);
-  function all() {
+  function getAll() {
     API.get()
       .then((data) => {
         setData(data.data);
@@ -31,25 +33,35 @@ function History() {
   return (
     <div className="container">
       <HistoryTypeFilters
-        all={() => all()}
-        cancelledExpired={() =>
-          TypeFilterAPICalls.cancelledExpired(API, setData)
-        }
-        FSBO={() => TypeFilterAPICalls.FSBO(API, setData)}
-        foreclosure={() => TypeFilterAPICalls.foreclosure(API, setData)}
+        all={() => {
+          getAll();
+          setState({ type: "" });
+        }}
+        cancelledExpired={() => {
+          TypeFilterAPICalls.cancelledExpired(API, setData);
+          setState({ type: "Cancelled" });
+        }}
+        FSBO={() => {
+          TypeFilterAPICalls.FSBO(API, setData);
+          setState({ type: "FSBO" });
+        }}
+        foreclosure={() => {
+          TypeFilterAPICalls.foreclosure(API, setData);
+          setState({ type: "Foreclosure" });
+        }}
       />
       <div className="box">
         <HistoryFilters
           dateHigh={() => {
-            FilterAPICalls.dateHigh(API, setData);
+            FilterAPICalls.dateHigh(API, setData, state);
           }}
-          dateLow={() => FilterAPICalls.dateLow(API, setData)}
-          typeHigh={() => FilterAPICalls.typeHigh(API, setData)}
-          typeLow={() => FilterAPICalls.typeLow(API, setData)}
-          addressHigh={() => FilterAPICalls.addressHigh(API, setData)}
-          addressLow={() => FilterAPICalls.addressLow(API, setData)}
-          nameHigh={() => FilterAPICalls.nameHigh(API, setData)}
-          nameLow={() => FilterAPICalls.nameLow(API, setData)}
+          dateLow={() => FilterAPICalls.dateLow(API, setData, state)}
+          typeHigh={() => FilterAPICalls.typeHigh(API, setData, state)}
+          typeLow={() => FilterAPICalls.typeLow(API, setData, state)}
+          addressHigh={() => FilterAPICalls.addressHigh(API, setData, state)}
+          addressLow={() => FilterAPICalls.addressLow(API, setData, state)}
+          nameHigh={() => FilterAPICalls.nameHigh(API, setData, state)}
+          nameLow={() => FilterAPICalls.nameLow(API, setData, state)}
         />
         {data.map((item) => {
           // DateComparison(item.type, item.date, today);

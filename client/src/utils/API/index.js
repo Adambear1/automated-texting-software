@@ -6,29 +6,35 @@ export default {
   post: (data) => {
     return axios.post("http://localhost:5000/api/input", data);
   },
-  dateHigh: () => {
-    return axios.get("http://localhost:5000/api/input/filters/dateHigh");
+  dateHigh: (data) => {
+    return axios.post("http://localhost:5000/api/input/filters/dateHigh", data);
   },
-  dateLow: () => {
-    return axios.get("http://localhost:5000/api/input/filters/dateLow");
+  dateLow: (data) => {
+    return axios.get("http://localhost:5000/api/input/filters/dateLow", data);
   },
-  typeHigh: () => {
-    return axios.get("http://localhost:5000/api/input/filters/typeHigh");
+  typeHigh: (data) => {
+    return axios.get("http://localhost:5000/api/input/filters/typeHigh", data);
   },
-  typeLow: () => {
-    return axios.get("http://localhost:5000/api/input/filters/typeLow");
+  typeLow: (data) => {
+    return axios.get("http://localhost:5000/api/input/filters/typeLow", data);
   },
-  addressHigh: () => {
-    return axios.get("http://localhost:5000/api/input/filters/addressHigh");
+  addressHigh: (data) => {
+    return axios.get(
+      "http://localhost:5000/api/input/filters/addressHigh",
+      data
+    );
   },
-  addressLow: () => {
-    return axios.get("http://localhost:5000/api/input/filters/addressLow");
+  addressLow: (data) => {
+    return axios.get(
+      "http://localhost:5000/api/input/filters/addressLow",
+      data
+    );
   },
-  nameHigh: () => {
-    return axios.get("http://localhost:5000/api/input/filters/nameHigh");
+  nameHigh: (data) => {
+    return axios.get("http://localhost:5000/api/input/filters/nameHigh", data);
   },
-  nameLow: () => {
-    return axios.get("http://localhost:5000/api/input/filters/nameLow");
+  nameLow: (data) => {
+    return axios.get("http://localhost:5000/api/input/filters/nameLow", data);
   },
   cancelledExpired: () => {
     return axios.get(

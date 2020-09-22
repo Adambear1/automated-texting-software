@@ -1,8 +1,8 @@
 const FilterAPICalls = {
   // date
-  dateHigh: function (api, state) {
+  dateHigh: function (api, state, info) {
     api
-      .dateHigh()
+      .dateHigh(info)
       .then((data) => {
         state(data.data);
       })
@@ -10,9 +10,9 @@ const FilterAPICalls = {
         console.log(error);
       });
   },
-  dateLow: function (api, state) {
+  dateLow: function (api, state, info) {
     api
-      .dateLow()
+      .dateLow(info)
       .then((data) => {
         state(data.data);
       })
@@ -21,9 +21,9 @@ const FilterAPICalls = {
       });
   },
   //   type
-  typeHigh: function (api, state) {
+  typeHigh: function (api, state, info) {
     api
-      .typeHigh()
+      .typeHigh(info)
       .then((data) => {
         state(data.data);
       })
@@ -31,9 +31,9 @@ const FilterAPICalls = {
         console.log(error);
       });
   },
-  typeLow: function (api, state) {
+  typeLow: function (api, state, info) {
     api
-      .typeLow()
+      .typeLow(info)
       .then((data) => {
         state(data.data);
       })
@@ -42,9 +42,9 @@ const FilterAPICalls = {
       });
   },
   //   address
-  addressHigh: function (api, state) {
+  addressHigh: function (api, state, info) {
     api
-      .addressHigh()
+      .addressHigh(info)
       .then((data) => {
         state(data.data);
       })
@@ -52,9 +52,9 @@ const FilterAPICalls = {
         console.log(error);
       });
   },
-  addressLow: function (api, state) {
+  addressLow: function (api, state, info) {
     api
-      .addressLow()
+      .addressLow(info)
       .then((data) => {
         state(data.data);
       })
@@ -63,9 +63,9 @@ const FilterAPICalls = {
       });
   },
   //   name
-  nameHigh: function (api, state) {
+  nameHigh: function (api, state, info) {
     api
-      .nameHigh()
+      .nameHigh(info)
       .then((data) => {
         state(data.data);
       })
@@ -73,9 +73,9 @@ const FilterAPICalls = {
         console.log(error);
       });
   },
-  nameLow: function (api, state) {
+  nameLow: function (api, state, info) {
     api
-      .nameLow()
+      .nameLow(info)
       .then((data) => {
         state(data.data);
       })

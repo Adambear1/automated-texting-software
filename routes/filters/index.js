@@ -2,25 +2,53 @@ require("dotenv").config();
 const router = require("express").Router();
 const db = require("../../models");
 
-router.get("/dateHigh", (req, res) => {
-  db.Input.find({}, null, { sort: { date: -1 } })
-    .then((data) => {
-      res.json(data);
-    })
-    .catch((err) => {
-      res.status(500).json({ err: err.message });
-    });
+router.post("/dateHigh", ({ body }, res) => {
+  if (body) {
+    db.Input.find(body)
+      .sort({ date: -1 })
+      .then((data) => {
+        console.log(data);
+        res.json(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ err: err.message });
+      });
+  } else {
+    db.Input.find({}, null, { sort: { date: -1 } })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) => {
+        res.status(500).json({ err: err.message });
+      });
+    console.log(body);
+  }
 });
-router.get("/dateLow", (req, res) => {
-  db.Input.find({}, null, { sort: { date: 1 } })
-    .then((data) => {
-      res.json(data);
-    })
-    .catch((err) => {
-      res.status(500).json({ err: err.message });
-    });
+router.get("/dateLow", ({ body }, res) => {
+  if (body) {
+    db.Input.find(body)
+      .sort({ date: 1 })
+      .then((data) => {
+        console.log(data);
+        res.json(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ err: err.message });
+      });
+  } else {
+    db.Input.find({}, null, { sort: { date: 1 } })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) => {
+        res.status(500).json({ err: err.message });
+      });
+    console.log(body);
+  }
 });
-router.get("/typeHigh", (req, res) => {
+router.get("/typeHigh", ({ body }, res) => {
   db.Input.find({}, null, { sort: { type: -1 } })
     .then((data) => {
       res.json(data);
@@ -29,7 +57,7 @@ router.get("/typeHigh", (req, res) => {
       res.status(500).json({ err: err.message });
     });
 });
-router.get("/typeLow", (req, res) => {
+router.get("/typeLow", ({ body }, res) => {
   db.Input.find({}, null, { sort: { type: 1 } })
     .then((data) => {
       res.json(data);
@@ -38,7 +66,7 @@ router.get("/typeLow", (req, res) => {
       res.status(500).json({ err: err.message });
     });
 });
-router.get("/addressHigh", (req, res) => {
+router.get("/addressHigh", ({ body }, res) => {
   db.Input.find({}, null, { sort: { address: -1 } })
     .then((data) => {
       res.json(data);
@@ -47,7 +75,7 @@ router.get("/addressHigh", (req, res) => {
       res.status(500).json({ err: err.message });
     });
 });
-router.get("/addressLow", (req, res) => {
+router.get("/addressLow", ({ body }, res) => {
   db.Input.find({}, null, { sort: { address: 1 } })
     .then((data) => {
       res.json(data);
@@ -56,7 +84,7 @@ router.get("/addressLow", (req, res) => {
       res.status(500).json({ err: err.message });
     });
 });
-router.get("/nameHigh", (req, res) => {
+router.get("/nameHigh", ({ body }, res) => {
   db.Input.find({}, null, { sort: { name: -1 } })
     .then((data) => {
       res.json(data);
@@ -65,7 +93,7 @@ router.get("/nameHigh", (req, res) => {
       res.status(500).json({ err: err.message });
     });
 });
-router.get("/nameLow", (req, res) => {
+router.get("/nameLow", ({ body }, res) => {
   db.Input.find({}, null, { sort: { name: 1 } })
     .then((data) => {
       res.json(data);
