@@ -1,18 +1,24 @@
 import React, { useEffect, useContext, useState } from "react";
-// utils
+// styling
 import "./styles.css";
 // utils
+import { TypeFilterAPICalls } from "../../utils/TypeFilterAPICalls";
+import { FilterAPICalls } from "../../utils/FilterAPICalls";
+import { SetClass } from "../../utils/SetClass";
 import API from "../../utils/API";
 // components
 import { Context } from "../Context";
 import HistoryCard from "../HistoryCard";
 import HistoryFilters from "../HistoryFilters";
+import HistoryTypeFilters from "../HistoryTypeFilters";
 
 function History() {
   const { value, setValue } = useContext(Context);
   const [data, setData] = useState([]);
   useEffect(() => {
-    console.log(value);
+    all();
+  }, [value]);
+  function all() {
     API.get()
       .then((data) => {
         setData(data.data);
@@ -21,95 +27,38 @@ function History() {
         console.log(error);
       });
     setValue(false);
-  }, [value]);
-  function dateHigh() {
-    API.dateHigh()
-      .then((data) => {
-        setData(data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  function dateLow() {
-    API.dateLow()
-      .then((data) => {
-        setData(data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  function typeHigh() {
-    API.typeHigh()
-      .then((data) => {
-        setData(data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  function typeLow() {
-    API.typeLow()
-      .then((data) => {
-        setData(data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  function addressHigh() {
-    API.addressHigh()
-      .then((data) => {
-        setData(data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  function addressLow() {
-    API.addressLow()
-      .then((data) => {
-        setData(data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  function nameHigh() {
-    API.nameHigh()
-      .then((data) => {
-        setData(data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  function nameLow() {
-    API.nameLow()
-      .then((data) => {
-        setData(data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }
   return (
     <div className="container">
+      <HistoryTypeFilters
+        all={() => all()}
+        cancelledExpired={() =>
+          TypeFilterAPICalls.cancelledExpired(API, setData)
+        }
+        FSBO={() => TypeFilterAPICalls.FSBO(API, setData)}
+        foreclosure={() => TypeFilterAPICalls.foreclosure(API, setData)}
+      />
       <div className="box">
         <HistoryFilters
-          dateHigh={dateHigh}
-          dateLow={dateLow}
-          typeHigh={typeHigh}
-          typeLow={typeLow}
-          addressHigh={addressHigh}
-          addressLow={addressLow}
-          nameHigh={nameHigh}
-          nameLow={nameLow}
+          dateHigh={() => {
+            FilterAPICalls.dateHigh(API, setData);
+          }}
+          dateLow={() => FilterAPICalls.dateLow(API, setData)}
+          typeHigh={() => FilterAPICalls.typeHigh(API, setData)}
+          typeLow={() => FilterAPICalls.typeLow(API, setData)}
+          addressHigh={() => FilterAPICalls.addressHigh(API, setData)}
+          addressLow={() => FilterAPICalls.addressLow(API, setData)}
+          nameHigh={() => FilterAPICalls.nameHigh(API, setData)}
+          nameLow={() => FilterAPICalls.nameLow(API, setData)}
         />
         {data.map((item) => {
+          // DateComparison(item.type, item.date, today);
           return (
             <HistoryCard
+              // icon={() => {
+
+              // }}
+              setClass={SetClass(item.type, item.date)}
               date={item.date}
               type={item.type}
               address={item.address}

@@ -3,6 +3,7 @@ import "./styles.css";
 // utils
 import { zipcodes } from "../../utils/zipcodes";
 import { cities } from "../../utils/cities";
+import { format } from "../../utils/DateFormatter";
 import API from "../../utils/API";
 // components
 import { Context } from "../Context";
@@ -63,13 +64,6 @@ function Input() {
         }, 2000);
       });
   }
-  const format = function (input) {
-    var pattern = /(\d{4})\-(\d{2})\-(\d{2})/;
-    if (!input || !input.match(pattern)) {
-      return null;
-    }
-    return input.replace(pattern, "$2/$3/$1");
-  };
   return (
     <form onSubmit={onSubmit}>
       <InputMain

@@ -31,3 +31,15 @@
   margin-left: 2px;
   border-bottom: 0px;
 }
+
+.danger {
+  background-color: rgba(255, 0, 0, 0.6);
+}
+
+.warning {
+  background-color: rgba(255, 166, 0, 0.6);
+}
+
+.safe {
+  background-color: rgba(0, 128, 0, 0.6);
+}

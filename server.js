@@ -38,6 +38,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use("/api/input", require("./routes"));
 app.use("/api/input/filters", require("./routes/filters"));
+app.use("/api/input/typefilters", require("./routes/typeFilters"));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));

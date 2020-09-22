@@ -30,4 +30,15 @@ export default {
   nameLow: () => {
     return axios.get("http://localhost:5000/api/input/filters/nameLow");
   },
+  cancelledExpired: () => {
+    return axios.get(
+      "http://localhost:5000/api/input/typefilters/cancelledExpired"
+    );
+  },
+  FSBO: () => {
+    return axios.get("http://localhost:5000/api/input/typefilters/FSBO");
+  },
+  foreclosure: () => {
+    return axios.get("http://localhost:5000/api/input/typefilters/foreclosure");
+  },
 };
