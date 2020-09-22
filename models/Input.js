@@ -19,19 +19,21 @@ const InputSchema = mongoose.Schema({
     required: [true, "Phone Number Required"],
   },
   type: {
-    enum: ["Cancelled", "Expired", "Foreclosure", "FSBO"],
+    type: String,
+    trim: true,
+    required: [true, "Type of Procurement is Required"],
   },
   default_amount: {
     type: String,
   },
   auction_date: {
-    type: Date,
+    type: String,
   },
   list_site: {
     type: String,
   },
   takedown_date: {
-    type: Date,
+    type: String,
   },
   date: {
     type: Date,

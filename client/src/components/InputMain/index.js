@@ -69,7 +69,7 @@ function InputMain(props) {
             type="date"
             class="form-control"
             id="form-cancelled-expired"
-            onChange={props.data}
+            onChange={props.date}
           />
         </div>
       </div>
@@ -103,7 +103,7 @@ function InputMain(props) {
             type="date"
             class="form-control"
             id="form-auction-date"
-            onChange={props.data}
+            onChange={props.date}
           />
         </div>
       </div>

@@ -12,7 +12,8 @@ import InputError from "../InputError";
 
 function Input() {
   const { value, setValue } = useContext(Context);
-  const [data, setData] = useState();
+  const [data, setData] = useState({});
+  const [date, setDate] = useState({});
   const [state, setState] = useState({});
   const [status, setStatus] = useState({
     Success: <InputSuccess />,
@@ -21,7 +22,6 @@ function Input() {
   });
   useEffect(() => {
     try {
-      console.log(data["type"]);
       if (data["type"] === "Cancelled" || data["type"] === "Expired") {
         console.log(
           document.getElementsByClassName("form-cancelled-expired")[0]
@@ -59,19 +59,13 @@ function Input() {
     } catch (error) {
       console.log(error);
     }
-    console.log(data);
+    console.log(date);
   }, [data]);
   function onChange(e) {
-    setData({ ...data, [e.target.name]: e.target.value });
+    setData({ ...data, ...date, [e.target.name]: e.target.value });
   }
   function onSubmit(e) {
     e.preventDefault();
-    if (!data) {
-      setState("Fail");
-      setTimeout(() => {
-        setState(null);
-      }, 2000);
-    }
     API.post(data)
       .then((data) => {
         setValue(true);
@@ -88,16 +82,19 @@ function Input() {
         }, 2000);
       });
   }
+  const format = function (input) {
+    var pattern = /(\d{4})\-(\d{2})\-(\d{2})/;
+    if (!input || !input.match(pattern)) {
+      return null;
+    }
+    return input.replace(pattern, "$2/$3/$1");
+  };
   return (
     <form onSubmit={onSubmit}>
       <InputMain
         data={onChange}
-        type={() => {
-          try {
-            return data["type"];
-          } catch (error) {
-            console.log(error);
-          }
+        date={(e) => {
+          setDate({ [e.target.name]: format(e.target.value) });
         }}
       />
       {state && status[state]}

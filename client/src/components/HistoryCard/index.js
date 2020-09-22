@@ -4,15 +4,17 @@ import "./styles.css";
 function HistoryCard(props) {
   return (
     <div class="history-card">
-      <div class="col-2">{`${props.date}`}</div>
-      <div class="col-2">{`${props.type}`}</div>
-      <div class="col-3">{`${props.address}`}</div>
-      <div class="col-3">{`${props.name}`}</div>
-      <div class="col-2">
-        <button type="button" onClick={props.send}>
-          <i class="fas fa-share-square"></i>
-        </button>
-      </div>
+      <ul class="history-ul">
+        <li class="history-li">{`${props.date}`}</li>
+        <li class="history-li">{`${props.type}`}</li>
+        <li class="history-li">{`${props.address}`}</li>
+        <li class="history-li">{`${props.name}`}</li>
+        <li class="history-li">
+          <button type="button" onClick={props.send}>
+            <i class="fas fa-share-square"></i>
+          </button>
+        </li>
+      </ul>
     </div>
   );
 }

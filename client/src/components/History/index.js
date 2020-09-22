@@ -6,6 +6,7 @@ import API from "../../utils/API";
 // components
 import { Context } from "../Context";
 import HistoryCard from "../HistoryCard";
+import HistoryFilters from "../HistoryFilters";
 
 function History() {
   const { value, setValue } = useContext(Context);
@@ -14,34 +15,34 @@ function History() {
     console.log(value);
     API.get()
       .then((data) => {
-        setData([data.data]);
+        setData(data.data);
       })
       .catch((error) => {
         console.log(error);
       });
     setValue(false);
   }, [value]);
-  function send(data) {
-    API.sendOld(data)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+  // function send(data) {
+  //   API.sendOld(data)
+  //     .then((data) => {
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }
   return (
     <div className="container">
       <div className="box">
+        <HistoryFilters />
         {data.map((item) => {
-          console.log(item);
           return (
             <HistoryCard
               date={item.auction_date ? item.auction_date : item.takedown_date}
               type={item.type}
               address={item.address}
               name={item.name}
-              send={send}
+              // send={send}
             />
           );
         })}
