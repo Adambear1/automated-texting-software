@@ -6,6 +6,9 @@ export default {
   post: (data) => {
     return axios.post("http://localhost:5000/api/input", data);
   },
+  send: (data) => {
+    return axios.post("http://localhost:5000/api/input/send", data);
+  },
   remove: (data) => {
     console.log(data);
     return axios.delete("http://localhost:5000/api/input/" + data);

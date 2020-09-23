@@ -36,6 +36,16 @@ function History() {
       });
     setValue(false);
   }
+  function send(e, id) {
+    e.stopPropagation();
+    API.send({ _id: id })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   function remove(e, id) {
     e.stopPropagation();
     API.remove(id)
@@ -155,10 +165,9 @@ function History() {
                 name={item.name}
                 id={item._id}
                 delete={(e) => {
-                  console.log(e.target);
                   remove(e, e.target.id);
                 }}
-                // send={send}
+                send={(e) => send(e, e.target.id)}
               />
             );
           })

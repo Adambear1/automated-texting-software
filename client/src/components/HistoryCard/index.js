@@ -14,7 +14,7 @@ function HistoryCard(props) {
         <li class="history-li">{`${props.name}`}</li>
         <div>
           <button type="button" onClick={props.send}>
-            <i class="far fa-paper-plane"></i>
+            <i class="far fa-paper-plane" id={`${props.id}`}></i>
           </button>
         </div>
         <div>

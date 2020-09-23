@@ -2,19 +2,33 @@ require("dotenv").config();
 const router = require("express").Router();
 const db = require("../models");
 
-const { email } = require("../utils/Nodemailer");
-const { text } = require("../utils/Nexmo");
+const { foreclosure } = require("../utils/Nodemailer/Foreclosure");
+// const { text } = require("../utils/Nexmo");
 
 router.post("/", ({ body }, res) => {
   console.log(body);
   db.Input.create(body)
     .then((data) => {
       res.json(data);
-      data.email && email(data);
-      data.phoneNumber && text(data);
+      if (data.email) {
+        foreclosure(data);
+      }
+      // data.phoneNumber && text(data);
     })
     .catch((err) => {
       res.status(500).json({ err: err.message });
+    });
+});
+
+router.post("/send", ({ body }, res) => {
+  console.log(body);
+  db.Input.findOne(body)
+    .then((data) => {
+      console.log(data);
+      foreclosure(data);
+    })
+    .catch((error) => {
+      console.log(error);
     });
 });
 
