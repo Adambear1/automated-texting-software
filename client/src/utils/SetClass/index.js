@@ -18,6 +18,21 @@ function SetClass(type, date) {
       return "safe";
     }
   }
+  if (type === "Foreclosure" && month > thisMonth) {
+    console.log();
+    if (thisDay - (day + thisDay) + (month - thisMonth) * 30 < 20) {
+      return "danger";
+    }
+    if (
+      thisDay - (day + thisDay) + (month - thisMonth) * 30 >= 20 &&
+      thisDay - (day + thisDay) + (month - thisMonth) * 30 < 35
+    ) {
+      return "warning";
+    }
+    if (thisDay - (day + thisDay) + (month - thisMonth) * 30 >= 35) {
+      return "safe";
+    }
+  }
 }
 
 export { SetClass };

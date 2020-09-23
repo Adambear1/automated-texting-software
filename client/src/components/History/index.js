@@ -11,7 +11,6 @@ import { Context } from "../Context";
 import HistoryCard from "../HistoryCard";
 import HistoryFilters from "../HistoryFilters";
 import HistoryTypeFilters from "../HistoryTypeFilters";
-import { pipeline } from "nodemailer/lib/xoauth2";
 
 function History() {
   const { value, setValue } = useContext(Context);
@@ -19,7 +18,6 @@ function History() {
   const [data, setData] = useState([]);
   useEffect(() => {
     getAll();
-    console.log(state);
   }, [value]);
   function getAll() {
     API.get()
@@ -32,10 +30,10 @@ function History() {
     setValue(false);
   }
   function remove(e, id) {
-    e.preventDefault();
+    e.stopPropagation();
     API.remove({ _id: id })
       .then((data) => {
-        console.log(data);
+        setValue(true);
         // setData(data.data);
       })
       .catch((error) => {

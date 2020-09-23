@@ -24,8 +24,12 @@ function InputMain(props) {
               type="text"
               class="form-control"
               onChange={props.data}
+              onChange={props.zipcode}
               id="form-zipcode"
             />
+            <small for="form-zipcode">{`${props.city}${"  "}${
+              props.county
+            }`}</small>
           </div>
         </div>
       </div>
@@ -90,7 +94,7 @@ function InputMain(props) {
       {/* Cancelled/Expired */}
       <div class="form-group ">
         <div class="form-date hide">
-          <label for="form-cancelled-expired">Date {props.type}</label>
+          <label for="form-cancelled-expired">Date {`${props.type}`}</label>
           <input
             name="date"
             type="date"

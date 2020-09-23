@@ -1,0 +1,12 @@
+.input-button-submit button {
+  background-color: transparent;
+  border: 0px !important;
+}
+.input-button-submit button I {
+  color: dodgerblue;
+}
+
+.input-button-submit button:active {
+  border: 0px !important;
+  transform: translateY(0.5) !important;
+}

@@ -4,6 +4,7 @@ import "./styles.css";
 import { zipcodes } from "../../utils/zipcodes";
 import { cities } from "../../utils/cities";
 import { format } from "../../utils/DateFormatter";
+import { Alert } from "../../utils/FormAlert";
 import API from "../../utils/API";
 // components
 import { Context } from "../Context";
@@ -23,45 +24,72 @@ function Input() {
     Fail: <InputFail />,
     Error: <InputError />,
   });
+  const [zipcode, setZipcode] = useState("");
+  const [city, setCity] = useState("");
+  const [county, setCounty] = useState("");
+
   useEffect(() => {
     try {
       if (data["type"]) {
         document
           .getElementsByClassName("form-date")[0]
-          .classList.removeClass("hide");
+          .classList.remove("hide");
       }
-      // if (date["type"] === "Foreclosure") {
-      //   document
-      //     .getElementsByClassName("form-foreclosure")[0]
-      //     .classList.removeClass("hide");
-      //   document
-      //     .getElementsByClassName("form-date")[0]
-      //     .classList.removeClass("hide");
-      // }
+      if (data["type"] === "Foreclosure") {
+        document
+          .getElementsByClassName("form-foreclosure")[0]
+          .classList.remove("hide");
+        document
+          .getElementsByClassName("form-date")[0]
+          .classList.remove("hide");
+      }
     } catch (error) {
       console.log(error);
     }
-    console.log(date);
+    console.log(data);
   }, [data]);
+  useEffect(() => {
+    zipcodes.map((item) => {
+      for (const cities in item) {
+        item[cities].map((zc) => {
+          if (+zc === +zipcode) {
+            setCity(cities.split("_").join(" "));
+          }
+        });
+      }
+    });
+  }, [zipcode]);
+  useEffect(() => {
+    cities.map((item) => {
+      for (const counties in item) {
+        item[counties].map((cnty) => {
+          if (cnty === city) {
+            setCounty(counties.split("_").join(" "));
+          }
+        });
+      }
+    });
+  }, [city]);
   function onChange(e) {
-    setData({ ...data, ...date, [e.target.name]: e.target.value });
+    setData({
+      ...data,
+      ...date,
+      ...city,
+      ...zipcode,
+      ...county,
+      [e.target.name]: e.target.value,
+    });
   }
   function onSubmit(e) {
     e.preventDefault();
     API.post(data)
       .then((data) => {
         setValue(true);
-        setState("Success");
-        setTimeout(() => {
-          setState(null);
-        }, 2000);
+        Alert(setState, "Success");
       })
       .catch((err) => {
         console.log(err);
-        setState("Error");
-        setTimeout(() => {
-          setState(null);
-        }, 2000);
+        Alert(setState, "Error");
       });
   }
   return (
@@ -71,6 +99,10 @@ function Input() {
         date={(e) => {
           setDate({ [e.target.name]: format(e.target.value) });
         }}
+        zipcode={(e) => setZipcode(e.target.value)}
+        type={data["type"] && data["type"]}
+        city={city && `${city}${", "}`}
+        county={county && `${county} County`}
       />
       {state && status[state]}
       <div className="row">
