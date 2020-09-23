@@ -3,7 +3,7 @@ const router = require("express").Router();
 const db = require("../../models");
 
 router.get("/cancelledExpired", (req, res) => {
-  db.Input.find({ type: "Cancelled" || "Expired" })
+  db.Input.find({ $or: [{ type: "Cancelled" }, { type: "Expired" }] })
     .then((data) => {
       res.json(data);
     })

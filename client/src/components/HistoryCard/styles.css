@@ -9,24 +9,35 @@
   border-bottom: 1px solid black;
   margin-bottom: 2px;
   width: 100%;
+  display: flex;
+  align-items: stretch; /* Default */
+  justify-content: space-between;
 }
 .history-li {
-  margin-left: 2%;
-  display: inline;
   width: 100%;
   height: 18px;
   text-decoration: none;
   font-size: auto;
+  /* 
+   */
+  display: block;
+  flex: 0 1 auto; /* Default */
+  list-style-type: none;
 }
-.history-li button {
+
+.history-card button {
+  /* visibility: hidden; */
   width: auto;
   height: 18px;
   border: none;
   background-color: transparent;
+  transition: 3s ease;
 }
-.history-li:first-child {
-  margin-left: 2px;
+
+.history-card button:hover {
+  visibility: visible;
 }
+
 .history-ul:nth-last-child() {
   margin-left: 2px;
   border-bottom: 0px;

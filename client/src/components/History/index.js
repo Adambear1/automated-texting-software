@@ -11,13 +11,20 @@ import { Context } from "../Context";
 import HistoryCard from "../HistoryCard";
 import HistoryFilters from "../HistoryFilters";
 import HistoryTypeFilters from "../HistoryTypeFilters";
+import Loader from "../Loader";
+import { CurrencyFormat } from "../../utils/CurrencyFormat";
 
 function History() {
   const { value, setValue } = useContext(Context);
   const [state, setState] = useState("");
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     getAll();
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
   }, [value]);
   function getAll() {
     API.get()
@@ -31,10 +38,9 @@ function History() {
   }
   function remove(e, id) {
     e.stopPropagation();
-    API.remove({ _id: id })
+    API.remove(id)
       .then((data) => {
         setValue(true);
-        // setData(data.data);
       })
       .catch((error) => {
         console.log(error);
@@ -80,6 +86,16 @@ function History() {
               ? FilterAPICalls.typeLow(API, setData, state)
               : FilterAPICalls.typeLowAll(API, setData)
           }
+          amountHigh={() =>
+            state
+              ? FilterAPICalls.amountHigh(API, setData, state)
+              : FilterAPICalls.amountHighAll(API, setData)
+          }
+          amountLow={() =>
+            state
+              ? FilterAPICalls.amountLow(API, setData, state)
+              : FilterAPICalls.amountLowAll(API, setData)
+          }
           addressHigh={() =>
             state
               ? FilterAPICalls.addressHigh(API, setData, state)
@@ -89,6 +105,26 @@ function History() {
             state
               ? FilterAPICalls.addressLow(API, setData, state)
               : FilterAPICalls.addressLowAll(API, setData)
+          }
+          cityHigh={() =>
+            state
+              ? FilterAPICalls.cityHigh(API, setData, state)
+              : FilterAPICalls.cityHighAll(API, setData)
+          }
+          cityLow={() =>
+            state
+              ? FilterAPICalls.cityLow(API, setData, state)
+              : FilterAPICalls.cityLowAll(API, setData)
+          }
+          countyHigh={() =>
+            state
+              ? FilterAPICalls.countyHigh(API, setData, state)
+              : FilterAPICalls.countyHighAll(API, setData)
+          }
+          countyLow={() =>
+            state
+              ? FilterAPICalls.countyLow(API, setData, state)
+              : FilterAPICalls.countyLowAll(API, setData)
           }
           nameHigh={() =>
             state
@@ -101,23 +137,32 @@ function History() {
               : FilterAPICalls.nameLowAll(API, setData)
           }
         />
-        {data.map((item) => {
-          return (
-            <HistoryCard
-              setClass={SetClass(item.type, item.date)}
-              date={item.date}
-              type={item.type}
-              address={item.address}
-              name={item.name}
-              id={item._id}
-              delete={(e) => {
-                console.log(e.target);
-                remove(e, e.target.id);
-              }}
-              // send={send}
-            />
-          );
-        })}
+
+        {loading ? (
+          <Loader />
+        ) : (
+          data.map((item) => {
+            return (
+              <HistoryCard
+                key={item._id}
+                setClass={SetClass(item.type, item.date)}
+                date={item.date}
+                type={item.type}
+                amount={CurrencyFormat(+item.amount)}
+                address={item.address}
+                city={item.city}
+                county={item.county}
+                name={item.name}
+                id={item._id}
+                delete={(e) => {
+                  console.log(e.target);
+                  remove(e, e.target.id);
+                }}
+                // send={send}
+              />
+            );
+          })
+        )}
       </div>
     </div>
   );

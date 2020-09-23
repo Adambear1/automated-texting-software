@@ -8,6 +8,7 @@ function InputMain(props) {
           <div class="form-group">
             <label for="form-address">Property Address</label>
             <input
+              autoFocus="true"
               name="address"
               type="text"
               class="form-control"
@@ -38,7 +39,6 @@ function InputMain(props) {
           <div class="form-group">
             <label for="form-name">Owner Name</label>
             <input
-              autoFocus="true"
               name="name"
               type="text"
               class="form-control"
@@ -92,28 +92,30 @@ function InputMain(props) {
         </select>
       </div>
       {/* Cancelled/Expired */}
-      <div class="form-group ">
-        <div class="form-date hide">
-          <label for="form-cancelled-expired">Date {`${props.type}`}</label>
-          <input
-            name="date"
-            type="date"
-            class="form-control"
-            id="form-cancelled-expired"
-            onChange={props.date}
-          />
+      <div class="row">
+        <div class="col-6">
+          <div class="form-date hide">
+            <label for="form-cancelled-expired">Date {`${props.type}`}</label>
+            <input
+              name="date"
+              type="date"
+              class="form-control"
+              id="form-cancelled-expired"
+              onChange={props.date}
+            />
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="form-foreclosure hide">
-          <label for="form-default-amount">Default Amount</label>
-          <input
-            name="default_amount"
-            type="text"
-            class="form-control"
-            id="form-default-amount"
-            onChange={props.data}
-          />
+        <div class="col-6">
+          <div class="form-foreclosure hide">
+            <label for="form-amount">{`${props.typeAmount}`}</label>
+            <input
+              name="amount"
+              type="text"
+              class="form-control"
+              id="form-amount"
+              onChange={props.data}
+            />
+          </div>
         </div>
       </div>
     </>

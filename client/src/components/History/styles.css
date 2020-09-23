@@ -2,6 +2,9 @@
   border: 1.5px solid black;
   background-color: white;
   border-radius: 15px;
+  height: 50vh;
+  overflow: scroll;
+  margin-bottom: 15px;
 }
 .box-filters {
   /* height: 20px; */
@@ -14,14 +17,18 @@
   border-bottom: 1px solid black;
   margin-bottom: 2px;
   width: 100%;
+  display: flex;
+  align-items: stretch; /* Default */
+  justify-content: space-between;
 }
 .box-filters-li {
   margin-left: 2%;
   display: inline;
-  width: 100%;
-  height: 18px;
   text-decoration: none;
   font-size: auto;
+  /* display: block; */
+  flex: 0 1 auto; /* Default */
+  list-style-type: none;
 }
 .box-filters-li button {
   padding: 0px;
@@ -36,9 +43,6 @@
 .box-filters-li button:active {
   border: 0px !important;
   transform: scaleY(0.95);
-}
-.box-filters-li:first-child {
-  margin-left: 2px;
 }
 
 /* Type Filters */
@@ -56,6 +60,8 @@
   height: 18px;
   text-decoration: none;
   font-size: auto;
+  flex: 0 1 auto; /* Default */
+  list-style-type: none;
 }
 .box-type-filters-li button {
   padding: 0px;
@@ -70,7 +76,4 @@
 .box-type-filters-li button:active {
   border: 0px !important;
   transform: scaleY(0.95);
-}
-.box-type-filters-li:first-child {
-  margin-left: 2px;
 }

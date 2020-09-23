@@ -32,9 +32,9 @@ router.get("/", ({ body }, res) => {
     });
 });
 
-router.delete("/", ({ body }, res) => {
-  console.log(body);
-  db.Input.deleteOne(body)
+router.delete("/:id", (req, res) => {
+  let params = req.params.id;
+  db.Input.deleteOne({ _id: params })
     .then((data) => {
       try {
         res.json(data);

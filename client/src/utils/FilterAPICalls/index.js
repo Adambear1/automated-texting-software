@@ -44,7 +44,7 @@ const FilterAPICalls = {
         console.log(error);
       });
   },
-  //   type
+  //   Type
   typeHigh: function (api, state, info) {
     api
       .typeHigh(info)
@@ -87,7 +87,50 @@ const FilterAPICalls = {
         console.log(error);
       });
   },
-  //   address
+  //   Amount
+  amountHigh: function (api, state, info) {
+    api
+      .amountHigh(info)
+      .then((data) => {
+        state(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  amountHighAll: function (api, state) {
+    api
+      .amountHighAll()
+      .then((data) => {
+        console.log(data.data);
+        state(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  amountLow: function (api, state, info) {
+    api
+      .amountLow(info)
+      .then((data) => {
+        state(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  amountLowAll: function (api, state) {
+    api
+      .amountLowAll()
+      .then((data) => {
+        console.log(data.data);
+        state(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  //   Address
   addressHigh: function (api, state, info) {
     api
       .addressHigh(info)
@@ -122,6 +165,92 @@ const FilterAPICalls = {
   addressLowAll: function (api, state) {
     api
       .addressLowAll()
+      .then((data) => {
+        console.log(data.data);
+        state(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  //   city
+  cityHigh: function (api, state, info) {
+    api
+      .cityHigh(info)
+      .then((data) => {
+        state(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  cityHighAll: function (api, state) {
+    api
+      .cityHighAll()
+      .then((data) => {
+        console.log(data.data);
+        state(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  cityLow: function (api, state, info) {
+    api
+      .cityLow(info)
+      .then((data) => {
+        state(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  cityLowAll: function (api, state) {
+    api
+      .cityLowAll()
+      .then((data) => {
+        console.log(data.data);
+        state(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  //   county
+  countyHigh: function (api, state, info) {
+    api
+      .countyHigh(info)
+      .then((data) => {
+        state(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  countyHighAll: function (api, state) {
+    api
+      .countyHighAll()
+      .then((data) => {
+        console.log(data.data);
+        state(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  countyLow: function (api, state, info) {
+    api
+      .countyLow(info)
+      .then((data) => {
+        state(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  countyLowAll: function (api, state) {
+    api
+      .countyLowAll()
       .then((data) => {
         console.log(data.data);
         state(data.data);

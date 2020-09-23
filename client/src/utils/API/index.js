@@ -7,7 +7,8 @@ export default {
     return axios.post("http://localhost:5000/api/input", data);
   },
   remove: (data) => {
-    return axios.delete("http://localhost:5000/api/input", data);
+    console.log(data);
+    return axios.delete("http://localhost:5000/api/input/" + data);
   },
   dateHigh: (data) => {
     return axios.post("http://localhost:5000/api/input/filters/dateHigh", data);
@@ -33,6 +34,24 @@ export default {
   typeLowAll: () => {
     return axios.get("http://localhost:5000/api/input/filters/typeLowAll");
   },
+  amountHigh: (data) => {
+    return axios.post(
+      "http://localhost:5000/api/input/filters/amountHigh",
+      data
+    );
+  },
+  amountHighAll: () => {
+    return axios.get("http://localhost:5000/api/input/filters/amountHighAll");
+  },
+  amountLow: (data) => {
+    return axios.post(
+      "http://localhost:5000/api/input/filters/amountLow",
+      data
+    );
+  },
+  amountLowAll: () => {
+    return axios.get("http://localhost:5000/api/input/filters/amountLowAll");
+  },
   addressHigh: (data) => {
     return axios.post(
       "http://localhost:5000/api/input/filters/addressHigh",
@@ -50,6 +69,36 @@ export default {
   },
   addressLowAll: () => {
     return axios.get("http://localhost:5000/api/input/filters/addressLowAll");
+  },
+  cityHigh: (data) => {
+    return axios.post("http://localhost:5000/api/input/filters/cityHigh", data);
+  },
+  cityHighAll: () => {
+    return axios.get("http://localhost:5000/api/input/filters/cityHighAll");
+  },
+  cityLow: (data) => {
+    return axios.post("http://localhost:5000/api/input/filters/cityLow", data);
+  },
+  cityLowAll: () => {
+    return axios.get("http://localhost:5000/api/input/filters/cityLowAll");
+  },
+  countyHigh: (data) => {
+    return axios.post(
+      "http://localhost:5000/api/input/filters/countyHigh",
+      data
+    );
+  },
+  countyHighAll: () => {
+    return axios.get("http://localhost:5000/api/input/filters/countyHighAll");
+  },
+  countyLow: (data) => {
+    return axios.post(
+      "http://localhost:5000/api/input/filters/countyLow",
+      data
+    );
+  },
+  countyLowAll: () => {
+    return axios.get("http://localhost:5000/api/input/filters/countyLowAll");
   },
   nameHigh: (data) => {
     return axios.post("http://localhost:5000/api/input/filters/nameHigh", data);

@@ -53,8 +53,8 @@ router.get("/dateLowAll", (req, res) => {
 });
 // Type
 router.post("/typeHigh", ({ body }, res) => {
-  if (body) {
-    db.Input.find(body)
+  if (body["type"] === "Cancelled" || body["type"] === "Expired") {
+    db.Input.find({ $or: [{ type: "Cancelled" }, { type: "Expired" }] })
       .sort({ type: -1 })
       .then((data) => {
         res.json(data);
@@ -64,6 +64,15 @@ router.post("/typeHigh", ({ body }, res) => {
         res.status(500).json({ err: err.message });
       });
   }
+  db.Input.find(body)
+    .sort({ type: -1 })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ err: err.message });
+    });
 });
 router.get("/typeHighAll", (req, res) => {
   db.Input.find()
@@ -77,8 +86,9 @@ router.get("/typeHighAll", (req, res) => {
     });
 });
 router.post("/typeLow", ({ body }, res) => {
-  if (body) {
-    db.Input.find(body)
+  console.log(body);
+  if (body["type"] === "Cancelled" || body["type"] === "Expired") {
+    db.Input.find({ $or: [{ type: "Cancelled" }, { type: "Expired" }] })
       .sort({ type: 1 })
       .then((data) => {
         res.json(data);
@@ -88,10 +98,68 @@ router.post("/typeLow", ({ body }, res) => {
         res.status(500).json({ err: err.message });
       });
   }
+  db.Input.find(body)
+    .sort({ type: 1 })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ err: err.message });
+    });
 });
 router.get("/typeLowAll", (req, res) => {
   db.Input.find()
     .sort({ type: 1 })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ err: err.message });
+    });
+});
+// Amount
+router.post("/amountHigh", ({ body }, res) => {
+  if (body) {
+    db.Input.find(body)
+      .sort({ amount: -1 })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ err: err.message });
+      });
+  }
+});
+router.get("/amountHighAll", (req, res) => {
+  db.Input.find()
+    .sort({ amount: -1 })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ err: err.message });
+    });
+});
+router.post("/amountLow", ({ body }, res) => {
+  if (body) {
+    db.Input.find(body)
+      .sort({ amount: 1 })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ err: err.message });
+      });
+  }
+});
+router.get("/amountLowAll", (req, res) => {
+  db.Input.find()
+    .sort({ amount: 1 })
     .then((data) => {
       res.json(data);
     })
@@ -141,6 +209,104 @@ router.post("/addressLow", ({ body }, res) => {
 router.get("/addressLowAll", (req, res) => {
   db.Input.find()
     .sort({ address: 1 })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ err: err.message });
+    });
+});
+// city
+router.post("/cityHigh", ({ body }, res) => {
+  if (body) {
+    db.Input.find(body)
+      .sort({ city: -1 })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ err: err.message });
+      });
+  }
+});
+router.get("/cityHighAll", (req, res) => {
+  db.Input.find()
+    .sort({ city: -1 })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ err: err.message });
+    });
+});
+router.post("/cityLow", ({ body }, res) => {
+  if (body) {
+    db.Input.find(body)
+      .sort({ city: 1 })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ err: err.message });
+      });
+  }
+});
+router.get("/cityLowAll", (req, res) => {
+  db.Input.find()
+    .sort({ city: 1 })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ err: err.message });
+    });
+});
+// county
+router.post("/countyHigh", ({ body }, res) => {
+  if (body) {
+    db.Input.find(body)
+      .sort({ county: -1 })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ err: err.message });
+      });
+  }
+});
+router.get("/countyHighAll", (req, res) => {
+  db.Input.find()
+    .sort({ county: -1 })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ err: err.message });
+    });
+});
+router.post("/countyLow", ({ body }, res) => {
+  if (body) {
+    db.Input.find(body)
+      .sort({ county: 1 })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ err: err.message });
+      });
+  }
+});
+router.get("/countyLowAll", (req, res) => {
+  db.Input.find()
+    .sort({ county: 1 })
     .then((data) => {
       res.json(data);
     })

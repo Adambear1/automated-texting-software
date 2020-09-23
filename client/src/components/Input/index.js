@@ -17,7 +17,7 @@ import InputError from "../InputError";
 function Input() {
   const { value, setValue } = useContext(Context);
   const [data, setData] = useState({});
-  const [date, setDate] = useState({});
+  const [date, setDate] = useState();
   const [state, setState] = useState({});
   const [status, setStatus] = useState({
     Success: <InputSuccess />,
@@ -27,15 +27,9 @@ function Input() {
   const [zipcode, setZipcode] = useState("");
   const [city, setCity] = useState("");
   const [county, setCounty] = useState("");
-
   useEffect(() => {
     try {
       if (data["type"]) {
-        document
-          .getElementsByClassName("form-date")[0]
-          .classList.remove("hide");
-      }
-      if (data["type"] === "Foreclosure") {
         document
           .getElementsByClassName("form-foreclosure")[0]
           .classList.remove("hide");
@@ -46,7 +40,6 @@ function Input() {
     } catch (error) {
       console.log(error);
     }
-    console.log(data);
   }, [data]);
   useEffect(() => {
     zipcodes.map((item) => {
@@ -71,14 +64,22 @@ function Input() {
     });
   }, [city]);
   function onChange(e) {
-    setData({
-      ...data,
-      ...date,
-      ...city,
-      ...zipcode,
-      ...county,
-      [e.target.name]: e.target.value,
-    });
+    e
+      ? setData({
+          ...data,
+          date,
+          city,
+          zipcode,
+          county,
+          [e.target.name]: e.target.value,
+        })
+      : setData({
+          ...data,
+          date,
+          city,
+          zipcode,
+          county,
+        });
   }
   function onSubmit(e) {
     e.preventDefault();
@@ -97,12 +98,19 @@ function Input() {
       <InputMain
         data={onChange}
         date={(e) => {
-          setDate({ [e.target.name]: format(e.target.value) });
+          console.log(format(e.target.value));
+          setDate(format(e.target.value));
+          setTimeout(() => {
+            onChange();
+          }, 200);
         }}
         zipcode={(e) => setZipcode(e.target.value)}
         type={data["type"] && data["type"]}
         city={city && `${city}${", "}`}
         county={county && `${county} County`}
+        typeAmount={
+          data["type"] === "Foreclosure" ? "Default Amount" : "Amount Owed"
+        }
       />
       {state && status[state]}
       <div className="row">
